@@ -1,0 +1,8 @@
+{
+  "name": "WQUnityUtils",
+  "rootNamespace": "WilliamQiufeng.UnityUtils",
+  "references": [
+    "GUID:6055be8ebefd69e48b49212b09b47b2f"
+  ],
+  "allowUnsafeCode": true
+}

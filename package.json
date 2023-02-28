@@ -1,0 +1,13 @@
+{
+  "name": "com.williamqiufeng.unityutils",
+  "version": "0.0.1",
+  "displayName": "WilliamQiufeng's Unity Utilities",
+  "author": {
+    "name": "WilliamQiufeng",
+    "email": "2710923955@qq.com",
+    "url": "https://qiufeng54321.github.io"
+  },
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  }
+}
