@@ -35,7 +35,7 @@ namespace WilliamQiufeng.UnityUtils.Misc
             }
         }
 
-        public static void Drift(this ref int self, int inc, int lb, int ub)
+        public static void Drift(this int self, int inc, int lb, int ub)
         {
             self = Math.Clamp(self + inc, lb, ub);
         }
@@ -48,6 +48,12 @@ namespace WilliamQiufeng.UnityUtils.Misc
         public static int Modulo(this int x, int m)
         {
             return (x % m + m) % m;
+        }
+
+        public static bool Flip(this bool self)
+        {
+            self = !self;
+            return self;
         }
 
         public static float FloatFromText(string text, float defaultValue = 0f)
