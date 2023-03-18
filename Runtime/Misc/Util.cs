@@ -13,6 +13,8 @@ namespace WilliamQiufeng.UnityUtils.Misc
     {
         public delegate void WebRequestDelegate(UnityWebRequest unityWebRequest);
 
+        public const float LargeEpsilon = 0.001f;
+
         public static float CyclicClamp(this float val, float lb, float ub)
         {
             var len = ub - lb + 1;
@@ -138,7 +140,7 @@ namespace WilliamQiufeng.UnityUtils.Misc
 
         public static bool ApproxEqual(this float a, float b)
         {
-            return Math.Abs(a - b) < 0.001f;
+            return Math.Abs(a - b) < LargeEpsilon;
         }
 
 
