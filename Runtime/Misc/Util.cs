@@ -138,6 +138,27 @@ namespace WilliamQiufeng.UnityUtils.Misc
             return index;
         }
 
+        public static int BinarySearchLastTrue<T>(this T[] array, Func<int, T, bool> comp)
+        {
+            // if none of the values in the range work, return lo - 1
+            var lo = 0;
+            var hi = array.Length - 1;
+            lo--;
+            while (lo < hi)
+            {
+                // find the middle of the current range (rounding up)
+                var mid = lo + (hi - lo + 1) / 2;
+                if (comp(mid, array[mid]))
+                    // if mid works, then all numbers smaller than mid also work
+                    lo = mid;
+                else
+                    // if mid does not work, greater values would not work either
+                    hi = mid - 1;
+            }
+
+            return lo;
+        }
+
         public static bool ApproxEqual(this float a, float b)
         {
             return Math.Abs(a - b) < LargeEpsilon;
