@@ -200,6 +200,16 @@ namespace WilliamQiufeng.UnityUtils.Misc
             return GetTexture(url, request => { onFinish(DownloadHandlerTexture.GetContent(request)); });
         }
 
+        public static bool RangeOrderedEqual<T>(this IList<T> self, IList<T> other)
+        {
+            if (self.Count != other.Count) return false;
+            for (var i = 0; i < self.Count; i++)
+                if (!self[i].Equals(other[i]))
+                    return false;
+
+            return true;
+        }
+
         private static AudioType GetAudioType(string path)
         {
             return Path.GetExtension(path)

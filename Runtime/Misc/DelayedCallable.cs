@@ -13,7 +13,7 @@ namespace WilliamQiufeng.UnityUtils.Misc
 
         protected bool QueueAction { get; set; }
         public Action DelayedAction { get; }
-        public float DelaySeconds { get; set; }
+        public float DelaySeconds { get; set; } = 1;
 
         public void Queue()
         {
@@ -34,7 +34,10 @@ namespace WilliamQiufeng.UnityUtils.Misc
                     while (QueueAction)
                     {
                         QueueAction = false;
-                        yield return new WaitForSeconds(DelaySeconds);
+                        if (DelaySeconds == 0)
+                            yield return new WaitForEndOfFrame();
+                        else
+                            yield return new WaitForSeconds(DelaySeconds);
                     }
 
                     DelayedAction();
