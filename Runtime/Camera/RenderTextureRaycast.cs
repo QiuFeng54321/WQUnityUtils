@@ -48,7 +48,7 @@ namespace WilliamQiufeng.UnityUtils.Camera
             if (changePos)
                 eventData.position = ray.GetPoint(0);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
-            Debug.Log($"Raw click {eventData.position}");
+            // Debug.Log($"Raw click {eventData.position}");
             ExecuteEvents.ExecuteHierarchy(hit.collider != null ? hit.collider.gameObject : defaultProcessor, eventData,
                 f);
         }
