@@ -109,6 +109,11 @@ namespace WilliamQiufeng.UnityUtils.Misc
             return Input.GetKeyDown(keyCode);
         }
 
+        public static bool JustReleased(this KeyCode keyCode)
+        {
+            return Input.GetKeyUp(keyCode);
+        }
+
         public static bool Pressed(this KeyCode keyCode)
         {
             return Input.GetKey(keyCode);
