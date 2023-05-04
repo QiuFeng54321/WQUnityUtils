@@ -54,26 +54,47 @@ namespace WilliamQiufeng.UnityUtils.Timeline
             FutureActions.Clear();
         }
 
-        public void Undo()
+        public bool Undo()
         {
             Time--;
-            if (PastActions.Count == 0) return;
+            if (PastActions.Count == 0) return false;
             var action = PastActions.Last.Value;
-            action.Undo();
-            FutureActions.AddLast(action);
-            PastActions.RemoveLast();
-            OnActionChange?.Invoke(action);
+            try
+            {
+                action.Undo();
+                FutureActions.AddLast(action);
+                PastActions.RemoveLast();
+                OnActionChange?.Invoke(action);
+                Debug.Log($"Undid {action}");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
         }
 
-        public void Redo()
+        public bool Redo()
         {
             Time++;
-            if (FutureActions.Count == 0) return;
+            if (FutureActions.Count == 0) return false;
             var action = FutureActions.Last.Value;
-            action.Redo();
-            PastActions.AddLast(action);
-            FutureActions.RemoveLast();
-            OnActionChange?.Invoke(action);
+            try
+            {
+                action.Redo();
+                PastActions.AddLast(action);
+                FutureActions.RemoveLast();
+                OnActionChange?.Invoke(action);
+                Debug.Log($"Redid {action}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
         }
 
         public bool TryPerformAction(IRevertibleAction action)
