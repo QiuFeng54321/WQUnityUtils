@@ -77,7 +77,6 @@ namespace WilliamQiufeng.UnityUtils.Timeline
 
         public bool Redo()
         {
-            Debug.Log("redo");
             Time++;
             if (FutureActions.Count == 0) return false;
             var action = FutureActions.Last.Value;
