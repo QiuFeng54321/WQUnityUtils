@@ -34,11 +34,16 @@ namespace WilliamQiufeng.UnityUtils.Controllers
             var val = EqualityComparer<T>.Default.Equals(increment, default)
                 ? Parse(inputField.text)
                 : Increment(Parse(inputField.text), increment);
+            SetValue(val);
+        }
+
+        public virtual void SetValue(T val, bool notify = true)
+        {
             if (Comparer<T>.Default.Compare(val, max) == 1) val = max;
             if (Comparer<T>.Default.Compare(val, min) == -1) val = min;
             inputField.SetTextWithoutNotify(ValueToString(val));
             if (EqualityComparer<T>.Default.Equals(val, previousValue)) return;
-            onValueChanged.Invoke(val);
+            if (notify) onValueChanged.Invoke(val);
             previousValue = val;
         }
 
