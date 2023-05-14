@@ -30,7 +30,7 @@ namespace WilliamQiufeng.UnityUtils.Misc
         public void Add(TEntity item)
         {
             if (item == null) return;
-            item.transform.parent = container.transform;
+            item.transform.SetParent(container.transform, true);
             Entities.Add(item);
             EntityAdded?.Invoke(item);
         }
@@ -55,7 +55,7 @@ namespace WilliamQiufeng.UnityUtils.Misc
         public bool Remove(TEntity item)
         {
             if (item == null) return false;
-            item.transform.parent = null;
+            item.transform.SetParent(null, true);
             EntityRemoved?.Invoke(item);
             return Entities.Remove(item);
         }
