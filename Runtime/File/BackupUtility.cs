@@ -14,6 +14,15 @@ namespace WilliamQiufeng.UnityUtils.File
             return $"{path}.{backupIndex}.bak";
         }
 
+        /// <summary>
+        ///     Backs up the specified path
+        ///     If the path is already backed up, it will be copied to the next backup
+        ///     If the next backup path is over backupCount, it will not be copied and will be overwritten
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="backupIndex"></param>
+        /// <param name="backupCount"></param>
+        /// <param name="filePathGenerator"></param>
         private static void BackupFor(string path, int backupIndex, int backupCount,
             GenerateFilePath filePathGenerator = default)
         {
