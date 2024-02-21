@@ -26,10 +26,11 @@ namespace WilliamQiufeng.UnityUtils.File
         private static void BackupFor(string path, int backupIndex, int backupCount,
             GenerateFilePath filePathGenerator = default)
         {
-            var srcPath = backupIndex == 0 ? path : (filePathGenerator ?? BackupFilePath)(path, backupIndex);
-            var backupPath = BackupFilePath(path, backupIndex + 1);
+            filePathGenerator ??= BackupFilePath;
+            var srcPath = backupIndex == 0 ? path : filePathGenerator(path, backupIndex);
+            var backupPath = filePathGenerator(path, backupIndex + 1);
             if (System.IO.File.Exists(backupPath) && backupIndex + 1 < backupCount)
-                BackupFor(path, backupIndex + 1, backupCount);
+                BackupFor(path, backupIndex + 1, backupCount, filePathGenerator);
             System.IO.File.Copy(srcPath, backupPath, true);
         }
     }
