@@ -7,12 +7,16 @@ namespace WilliamQiufeng.UnityUtils.Controllers
 {
     public class GenericInputWithSteps<T> : MonoBehaviour
     {
+        public delegate string ValueFormatter(T value);
+
         public TMP_InputField inputField;
 
         public UnityEvent<T> onValueChanged;
         public T invalidDefaultValue;
         public T min, max;
         public T previousValue;
+
+        public ValueFormatter CustomFormatter;
 
         public virtual T Parse(string text)
         {
@@ -41,7 +45,8 @@ namespace WilliamQiufeng.UnityUtils.Controllers
         {
             if (Comparer<T>.Default.Compare(val, max) == 1) val = max;
             if (Comparer<T>.Default.Compare(val, min) == -1) val = min;
-            inputField.SetTextWithoutNotify(ValueToString(val));
+            var displayText = (CustomFormatter ?? ValueToString)(val);
+            inputField.SetTextWithoutNotify(displayText);
             if (EqualityComparer<T>.Default.Equals(val, previousValue)) return;
             if (notify) onValueChanged.Invoke(val);
             previousValue = val;
